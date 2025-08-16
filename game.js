@@ -12,9 +12,9 @@ const acertoAudio = document.getElementById('acerto-som');
 const gameOverOverlay = document.getElementById('game-over-overlay');
 const finalScoreDisplay = document.getElementById('final-score');
 const restartButton = document.getElementById('restart-button');
-document.getElementById("start-image").addEventListener("click", function() {
-  iniciarJogo(); // ou qualquer função que inicia o jogo
-});
+
+
+
 
 
 let score = 0;
@@ -202,6 +202,7 @@ function gameLoop() {
 }
 
 // Evento para verificar se a palavra digitada está correta
+// ...existing code...
 wordInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && wordInput.value.trim() !== '') {
         const inputWord = wordInput.value.toLowerCase().trim();
@@ -212,7 +213,12 @@ wordInput.addEventListener('keydown', (event) => {
         );
 
         if (fallingIndex !== -1) {
-            score += 10;
+            // Pontuação diferenciada para palavras grandes
+            let pontos = 10;
+            if (fallingWords[fallingIndex].word.length > 8) {
+                pontos = 20; // ou outro valor que desejar
+            }
+            score += pontos;
             foundWordsCount++;
             scoreDisplay.textContent = `Pontuação: ${score}`;
             foundWordsDisplay.textContent = `Palavras: ${foundWordsCount}`;
