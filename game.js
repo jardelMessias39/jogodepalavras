@@ -31,18 +31,18 @@ let palavrasIniciadas = false;
 
 // Banco de palavras para o modo fácil
 const easyWords = [
-    "prato", "copo", "faca", "garfo", "colher", "pote", "jarra", "bule", "tigela", "toalha",
-    "mao", "cronometro", "olho", "nariz", "boca", "braco", "joelho", "dedo", "perna", "orelha",
-    "cotovelo", "ombro", "ana", "leopardo", "eva", "ruido", "bia", "joao", "hugo", "lara",
-    "mila", "pedro", "maria", "lucas", "sofia", "rio", "lima", "paris", "roma", "toquio",
-    "cairo", "macau", "belem", "braga", "teresina", "mesa", "cadeira", "janela", "porta",
-    "parede", "chao", "teto", "escada", "lampada", "sofa", "cama", "espelho", "livro",
-    "caneta", "lapis", "borracha", "papel", "caderno", "mochila", "sapato", "camisa",
+    "prato", "copo", "faca", "garfo", "colher", "pote", "jarra", "prerrogativa", "tigela", "toalha",
+    "perseverança", "cronometro", "olho", "nariz", "boca", "braco", "joelho", "dedo", "perna", "orelha",
+    "cotovelo", "ombro", "desenvolver", "leopardo", "otorrino", "ruido", "hiperidrose", "joao", "hugo", "lara",
+    "mila", "pedro", "maria", "lucas", "sofia", "rio", "lima", "paris", "roma", "toquio","dissimulado",
+    "cairo", "macau", "belem", "braga", "teresina", "mesa", "cadeira", "janela", "porta","complacente",
+    "parede", "chao", "teto", "escada", "lampada", "sofa", "intangibilidade", "espelho", "livro",
+    "caneta", "lapis", "borracha", "papel", "caderno", "mochila", "sapato", "camisa","resiliência",
     "calca", "meia", "blusa", "casaco", "chapeu", "gravata", "relogio", "anel", "brinco",
-    "pulseira", "oculos", "celular", "computador", "mouse", "teclado", "monitor", "fone",
+    "pulseira", "oculos", "celular", "computador", "mouse", "teclado", "monitor", "extracurricular",
     "carro", "moto", "bicicleta", "onibus", "trem", "aviao", "barco", "navio", "caminhao",
     "trator", "ambulancia", "bombeiro", "policia", "escola", "hospital", "igreja", "mercado",
-    "padaria", "farmacia", "praia", "parque", "cinema", "teatro", "museu", "biblioteca"
+    "padaria", "farmacia", "condolências", "parque", "cinema", "teatro", "museu", "biblioteca"
 ];
 
 // Função para tocar o som de acerto

@@ -165,3 +165,23 @@ body {
     font-size: 1.2em;
     cursor: pointer;
 }
+
+
+#start-icon {
+    width: 400px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  animation: flutuar 3s ease-in-out infinite;
+}
+#start-icon:hover {
+    transform: scale(1.05);
+}
+@keyframes flutuar {
+  0%   { transform: translateX(-50%) translateY(0); }
+  50%  { transform: translateX(-50%) translateY(10px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
