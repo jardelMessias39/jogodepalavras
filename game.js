@@ -1,6 +1,5 @@
 
 
-
 // Variáveis de controle do jogo (agora todas declaradas no topo)
 const gameArea = document.getElementById('game-area');
 const wordInput = document.getElementById('word-input');
@@ -12,10 +11,16 @@ const acertoAudio = document.getElementById('acerto-som');
 const gameOverOverlay = document.getElementById('game-over-overlay');
 const finalScoreDisplay = document.getElementById('final-score');
 const restartButton = document.getElementById('restart-button');
-
-
-
-
+let nomeJogador = localStorage.getItem('nomeJogador') || '';
+const nomeJogadorArea = document.getElementById('nome-jogador-area');
+const nomeJogadorInput = document.getElementById('nome-jogador');
+const confirmarNomeBtn = document.getElementById('confirmar-nome');
+const jogadorNomeDisplay = document.getElementById('jogador-nome');
+const introScreen = document.getElementById('intro-screen');
+const gameScreen = document.getElementById('game-screen');
+const startIcon = document.getElementById('start-icon');
+const startButton = document.getElementById('start-button');
+const painelDireito = document.getElementById('painel-direito');
 
 let score = 0;
 let foundWordsCount = 0;
@@ -31,10 +36,10 @@ let palavrasIniciadas = false;
 
 // Banco de palavras para o modo fácil
 const easyWords = [
-    "prato", "copo", "faca", "garfo", "colher", "pote", "jarra", "prerrogativa", "tigela", "toalha",
-    "perseverança", "cronometro", "olho", "nariz", "boca", "braco", "joelho", "dedo", "perna", "orelha",
-    "cotovelo", "ombro", "desenvolver", "leopardo", "otorrino", "ruido", "hiperidrose", "joao", "hugo", "lara",
-    "mila", "pedro", "maria", "lucas", "sofia", "rio", "lima", "paris", "roma", "toquio","dissimulado",
+    "prepotente", "copo", "pragmático", "incipiente", "colher", "inexorável", "jarra", "prerrogativa", "tigela", "toalha",
+    "perseverança", "cronometro", "olho", "nariz", "boca", "braco", "joelho", "compassivo", "perna", "orelha",
+    "cotovelo", "ombro", "desenvolver", "leopardo", "otorrino", "ruido", "hiperidrose", "democracia", "hugo", "corroborar",
+    "mila", "pedro", "arbitrário", "lucas", "sofia", "serenidade", "lima", "paris", "roma", "toquio","dissimulado",
     "cairo", "macau", "belem", "braga", "teresina", "mesa", "cadeira", "janela", "porta","complacente",
     "parede", "chao", "teto", "escada", "lampada", "sofa", "intangibilidade", "espelho", "livro",
     "caneta", "lapis", "borracha", "papel", "caderno", "mochila", "sapato", "camisa","resiliência",
@@ -45,6 +50,72 @@ const easyWords = [
     "padaria", "farmacia", "condolências", "parque", "cinema", "teatro", "museu", "biblioteca"
 ];
 
+startIcon.onclick = function() {
+    localStorage.removeItem('nomeJogador');
+
+  introScreen.style.display = "none";
+  gameScreen.style.display = "block";
+  // Mostra campo para nome se não houver nome salvo
+  if (!localStorage.getItem('nomeJogador')) {
+    nomeJogadorArea.style.display = "block";
+    jogadorNomeDisplay.style.display = "none";
+    nomeJogadorInput.value = '';
+    nomeJogadorInput.focus();
+
+    // Esconde os elementos do jogo principal
+    startButton.style.display = "none";
+    wordInput.style.display = "none";
+    scoreDisplay.style.display = "none";
+    foundWordsDisplay.style.display = "none";
+    if (painelDireito) painelDireito.style.display = "none";
+  } else {
+    nomeJogador = localStorage.getItem('nomeJogador');
+    jogadorNomeDisplay.textContent = `Jogador: ${nomeJogador}`;
+    jogadorNomeDisplay.style.display = "block";
+    nomeJogadorArea.style.display = "none";
+    // Mostra os elementos do jogo principal
+    startButton.style.display = "block";
+    wordInput.style.display = "block";
+    scoreDisplay.style.display = "block";
+    foundWordsDisplay.style.display = "block";
+    if (painelDireito) painelDireito.style.display = "block";
+  }
+  const nomeRecordista = localStorage.getItem("nomeRecordista") || "—";
+const recorde = localStorage.getItem("recorde") || 0;
+document.getElementById("recorde").textContent = `Recorde: ${recorde} (${nomeRecordista})`;
+
+};
+
+confirmarNomeBtn.onclick = function() {
+  const nome = nomeJogadorInput.value.trim();
+  if (!nome) {
+    alert("Digite seu nome para jogar!");
+    nomeJogadorInput.focus();
+    return;
+  }
+  nomeJogador = nome;
+  localStorage.setItem('nomeJogador', nomeJogador);
+
+  nomeJogadorArea.style.display = "none";
+  jogadorNomeDisplay.textContent = `Jogador: ${nomeJogador}`;
+  jogadorNomeDisplay.style.display = "block";
+
+  // Agora mostra os elementos do jogo principal
+  startButton.style.display = "block";
+  wordInput.style.display = "block";
+  scoreDisplay.style.display = "block";
+  foundWordsDisplay.style.display = "block";
+  if (painelDireito) painelDireito.style.display = "block";
+
+  wordInput.focus();
+};
+
+nomeJogadorInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    confirmarNomeBtn.click();
+  }
+});
+
 // Função para tocar o som de acerto
 function tocarSomAcerto() {
     if (acertoAudio) {
@@ -53,6 +124,19 @@ function tocarSomAcerto() {
         acertoAudio.play();
     }
 }
+
+// Função para atualizar o recorde na tela e no localStorage
+function atualizarRecorde(novaPontuacao) {
+  let recorde = localStorage.getItem("recorde") || 0;
+  if (novaPontuacao > recorde) {
+    recorde = novaPontuacao;
+    localStorage.setItem("recorde", recorde);
+    localStorage.setItem("nomeRecordista", nomeJogador);
+  }
+  const nomeRecordista = localStorage.getItem("nomeRecordista") || "—";
+  document.getElementById("recorde").textContent = `Recorde: ${recorde} (${nomeRecordista})`;
+}
+
 
 // Inicia o cronômetro
 function iniciarCronometro() {
@@ -137,6 +221,7 @@ function createFallingElement() {
                     isOverlapping = true;
                     break;
                 }
+              
             }
         }
         attempts++;
@@ -188,8 +273,11 @@ function gameLoop() {
             wordInput.disabled = true;
 
             // Mostra a tela de game over
-            finalScoreDisplay.textContent = score;
+            finalScoreDisplay.textContent = `Pontuação: ${score}`;
             gameOverOverlay.style.display = 'flex';
+            // atualizar o recorde no final do jogo
+            atualizarRecorde(score);
+
             return;
         } 
         else if (element.isRandomLetter && topPosition > gameArea.clientHeight) {
@@ -202,7 +290,6 @@ function gameLoop() {
 }
 
 // Evento para verificar se a palavra digitada está correta
-// ...existing code...
 wordInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && wordInput.value.trim() !== '') {
         const inputWord = wordInput.value.toLowerCase().trim();
@@ -220,9 +307,12 @@ wordInput.addEventListener('keydown', (event) => {
             }
             score += pontos;
             foundWordsCount++;
-            scoreDisplay.textContent = `Pontuação: ${score}`;
-            foundWordsDisplay.textContent = `Palavras: ${foundWordsCount}`;
+            scoreDisplay.textContent = 'Pontuação: ${score}';
+            foundWordsDisplay.textContent = 'Palavras: ${foundWordsCount}';
             tocarSomAcerto();
+
+            // Atualiza o recorde sempre que a pontuação mudar
+            atualizarRecorde(score);
 
             fallingWords[fallingIndex].letters.forEach(letter => letter.element.remove());
             fallingWords.splice(fallingIndex, 1);
@@ -238,10 +328,14 @@ wordInput.addEventListener('keydown', (event) => {
 
 // Função para iniciar o jogo
 function startGame() {
+
+
     // Limpa intervalos e estado do jogo
     clearInterval(wordSpawnInterval);
     clearInterval(letraInterval);
     pararCronometro();
+    jogadorNomeDisplay.textContent = 'Jogador: ${nomeJogador}';
+    jogadorNomeDisplay.style.display = "block";
     
     gameArea.innerHTML = '';
     gameOverOverlay.style.display = 'none'; // Esconde a tela de game over
@@ -250,12 +344,16 @@ function startGame() {
     fallingWords = [];
     gameSpeed = 0.5;
     acertosParaAumentarVelocidade = 0;
-    scoreDisplay.textContent = `Pontuação: ${score}`;
-    foundWordsDisplay.textContent = `Palavras: ${foundWordsCount}`;
+    scoreDisplay.textContent = 'Pontuação: ${score}';
+    foundWordsDisplay.textContent = 'Palavras: ${foundWordsCount}';
     wordInput.disabled = false;
     wordInput.value = '';
     wordInput.focus();
     palavrasIniciadas = false;
+
+    // Ao iniciar o jogo, mostre o recorde atual
+
+    atualizarRecorde(score);
 
     // Zera e inicia o cronômetro
     iniciarCronometro();
@@ -273,6 +371,14 @@ function startGame() {
         palavrasIniciadas = true;
     }, 100);
 }
+function sair() {
+  // Oculta o overlay de fim de jogo
+  document.getElementById("game-over-overlay").style.display = "none";
+
+  // Mostra a tela do jogo novamente
+  document.getElementById("game-screen").style.display = "block";
+}
+
 
 // Eventos para iniciar e reiniciar o jogo
 document.addEventListener('DOMContentLoaded', function () {
@@ -283,5 +389,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (restartButton) {
         restartButton.addEventListener('click', startGame);
     }
+    // Ao carregar a página, mostre o recorde atual
+document.addEventListener("DOMContentLoaded", function() {
+  // Seu código que deve rodar após o carregamento do DOM
+  atualizarRecorde(0);
 });
-  
+
+});
