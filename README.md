@@ -26,5 +26,7 @@ Chuva de Palavras é um jogo interativo desenvolvido para navegador, onde o joga
   <br>
   <br>
   <img src= "https://github.com/jardelMessias39/jogodepalavras/blob/main/asserts/projeto.png?raw=true" width= '400px'; alt = " tela do jogo">
+  <br>
+  <img src="https://github.com/jardelMessias39/jogodepalavras/blob/main/asserts/projeto2.png?raw=true" width= '400px'; alt = " tela do jogo">
 </script>
 
