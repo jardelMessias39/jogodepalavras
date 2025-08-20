@@ -98,6 +98,7 @@ confirmarNomeBtn.onclick = function() {
 
   nomeJogadorArea.style.display = "none";
   jogadorNomeDisplay.textContent = `Jogador: ${nomeJogador}`;
+
   jogadorNomeDisplay.style.display = "block";
 
   // Agora mostra os elementos do jogo principal
@@ -304,11 +305,15 @@ wordInput.addEventListener('keydown', (event) => {
             let pontos = 10;
             if (fallingWords[fallingIndex].word.length > 8) {
                 pontos = 20; // ou outro valor que desejar
+            }if (fallingWords[fallingIndex].word.length > 10) {
+                pontos = 30; // ou outro valor que desejar
+            }if (fallingWords[fallingIndex].word.length > 12) {
+                pontos = 40; // ou outro valor que desejar
             }
             score += pontos;
             foundWordsCount++;
-            scoreDisplay.textContent = 'Pontuação: ${score}';
-            foundWordsDisplay.textContent = 'Palavras: ${foundWordsCount}';
+            scoreDisplay.textContent = `Pontuação: ${score}`;
+            foundWordsDisplay.textContent = `Palavras: ${foundWordsCount}`;
             tocarSomAcerto();
 
             // Atualiza o recorde sempre que a pontuação mudar
@@ -317,7 +322,7 @@ wordInput.addEventListener('keydown', (event) => {
             fallingWords[fallingIndex].letters.forEach(letter => letter.element.remove());
             fallingWords.splice(fallingIndex, 1);
 
-            if (gameSpeed < 5) {
+            if (gameSpeed < 4) {
                 gameSpeed += 0.1;
             }
             atualizarPainelLateral();
@@ -329,20 +334,27 @@ wordInput.addEventListener('keydown', (event) => {
 // Função para iniciar o jogo
 function startGame() {
 
+    scoreDisplay.textContent = `Pontuação: ${score}`;
+foundWordsDisplay.textContent = `Palavras: ${foundWordsCount}`;
+
 
     // Limpa intervalos e estado do jogo
     clearInterval(wordSpawnInterval);
     clearInterval(letraInterval);
     pararCronometro();
-    jogadorNomeDisplay.textContent = 'Jogador: ${nomeJogador}';
-    jogadorNomeDisplay.style.display = "block";
-    
+   jogadorNomeDisplay.textContent = `Jogador: ${nomeJogador}`;
+    if (!nomeJogador) {
+        jogadorNomeDisplay.style.display = "none";
+    } else {
+        jogadorNomeDisplay.style.display = "block";
+    }
+
     gameArea.innerHTML = '';
     gameOverOverlay.style.display = 'none'; // Esconde a tela de game over
     score = 0;
     foundWordsCount = 0;
     fallingWords = [];
-    gameSpeed = 0.5;
+    gameSpeed = 0.2;
     acertosParaAumentarVelocidade = 0;
     scoreDisplay.textContent = 'Pontuação: ${score}';
     foundWordsDisplay.textContent = 'Palavras: ${foundWordsCount}';
@@ -362,14 +374,14 @@ function startGame() {
 
     // Inicia a criação das palavras e letras
     wordSpawnInterval = setInterval(createFallingElement, 4000);
-    letraInterval = setInterval(criarLetraVisual, 300);
+    letraInterval = setInterval(criarLetraVisual, 400);
 
     // Inicia o loop principal do jogo
     gameLoop();
 
     setTimeout(() => {
         palavrasIniciadas = true;
-    }, 100);
+    }, 4000);
 }
 function sair() {
   // Oculta o overlay de fim de jogo
