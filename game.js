@@ -49,6 +49,19 @@ const easyWords = [
     "trator", "ambulancia", "bombeiro", "policia", "escola", "hospital", "igreja", "mercado",
     "padaria", "farmacia", "condolências", "parque", "cinema", "teatro", "museu", "biblioteca"
 ];
+const descricaoOverlay = document.getElementById("descricao-overlay");
+const fecharDescricaoBtn = document.getElementById("fechar-descricao");
+
+// Mostrar descrição após confirmar nome
+confirmarNomeBtn.addEventListener("click", () => {
+  descricaoOverlay.style.display = "flex";
+});
+
+// Fechar ao clicar no botão "X"
+fecharDescricaoBtn.addEventListener("click", () => {
+  descricaoOverlay.style.display = "none";
+});
+
 
 startIcon.onclick = function() {
     localStorage.removeItem('nomeJogador');
