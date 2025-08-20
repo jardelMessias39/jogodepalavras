@@ -1,7 +1,7 @@
 
 
 <script>
-  <title> <i> Chuva de Palavras </i></title>
+  
 
       <h3>Chuva de Palavras</h3>
   
@@ -19,7 +19,7 @@ Chuva de Palavras é um jogo interativo desenvolvido para navegador, onde o joga
 •	Pontuação proporcional ao tamanho das palavras.
 •	Armazenamento de recordes e nome do jogador com localStorage.
 •	Reinício automático após completar o desafio.
-
-  < img src="
+    <h3> Icone da tela inicial</h3>
+  < img src="https://github.com/jardelMessias39/jogodepalavras/blob/main/asserts/projeto1.png"
 </script>
 
