@@ -24,7 +24,7 @@ const painelDireito = document.getElementById('painel-direito');
 
 let score = 0;
 let foundWordsCount = 0;
-let gameSpeed = 0.5;
+let gameSpeed = 0.3;
 let wordSpawnInterval;
 let letraInterval;
 let fallingWords = [];
