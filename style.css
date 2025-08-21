@@ -17,18 +17,11 @@ body {
   padding: 0;
   height: 100vh;
   overflow: hidden;
+  background-color:#eeeeee;
 }
 
 
-body::before {
-  content: "";
-  position: fixed; /* Use fixed para cobrir toda a tela */
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(149, 211, 252, 0.4); /* azul suave com transparência */
-  z-index: 0;
-  pointer-events: none;
-}
+
 
 
 #game-container {
@@ -45,7 +38,7 @@ body::before {
 
 #game-title {
   font-size: 2em;
-  color: #eff2f5;
+  color: #101921;
   margin-bottom: 20px;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
@@ -60,8 +53,7 @@ body::before {
     max-height: 400px;
     overflow: hidden; /* garante que as letras desapareçam ao passar do limite */
     margin-bottom: 25px;
-    border: 2px solid #1c1616;
-    border:none
+    border: none;
 }
 #word-input{
     display: block;
@@ -106,18 +98,18 @@ body::before {
 #start-button {
       margin-top: 15px;
       margin-left: 40%;
-      padding: 10px 30px;
+      padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      color:rgb(16, 174, 45);
-      border: 2px solid #b5677922;
-      background-color:#485548;
+      color: white;
+      border: none;
+      background-color:#2ecc71;
       border-radius: 5px;
       transition: background-color 0.3s;
 
 }
 #start-button:hover {
-    background-color: #1644aea4;
+    background-color: #27ae60;
     color: #fff;
 }
 .container-jogo {
@@ -168,10 +160,10 @@ body::before {
 #cronometro {
   font-size: 20px;
   margin-bottom: 20px;
-  color: #e1e0e7;
+  color: #2c3e50;
 }
 #recorde {
-  color: gold;
+  color: #27ae60;
   gap: 70px;
   font-size: 18px;
   text-align: center;
@@ -207,16 +199,17 @@ body::before {
 }
 
 .descricao-conteudo {
-  background-color: #fff8dc;
+  background-color: #333333;
   padding: 35px;
   border-radius: 15px;
   width: 80%;
   max-width: 500px;
   position: relative;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
   font-family: 'Montserrat', sans-serif;
    line-height: 1.6;
   text-align: justify;
+  color: #f0f0f0;
 
 }
 
