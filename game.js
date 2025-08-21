@@ -259,6 +259,17 @@ function createFallingElement() {
     atualizarPainelLateral();
     palavrasIniciadas = true;
 }
+// Seleciona o elemento do campo de entrada de texto
+const inputField = document.getElementById('word-input');
+
+// Adiciona um "ouvinte de evento" para quando o campo for clicado
+inputField.addEventListener('focus', () => {
+    // Rola a tela para que o campo de entrada fique visível
+    inputField.scrollIntoView({
+        behavior: 'smooth', // Deixa a rolagem suave
+        block: 'center' // Tenta colocar o elemento no centro da tela
+    });
+});
 
 // Loop principal do jogo: faz as palavras e letras caírem
 function gameLoop() {
